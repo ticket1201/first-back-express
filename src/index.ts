@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import {productsRouter} from './routes/products-router';
 import {addressesRouter} from './routes/addresses-router';
 import cors from 'cors';
+import {orderRouter} from './routes/orderRouter';
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -16,6 +17,7 @@ app.use(cors(corsOptions))
 app.use(bodyParser())
 app.use('/products', productsRouter)
 app.use('/addresses', addressesRouter)
+app.use('/order', orderRouter)
 
 app.get('/', (req, res) => {
     res.send('Hello World!!!');
