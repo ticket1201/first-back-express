@@ -1,6 +1,6 @@
 import {Router} from 'express';
 
-type ProductType = {
+export type ProductType = {
     id: number
     description: string
     name: string
