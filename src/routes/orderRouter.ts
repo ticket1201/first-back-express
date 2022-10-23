@@ -10,17 +10,22 @@ type orderType = {
     products: ProductType[]
 }
 
+const namesArray = ['name', 'surname', 'address', 'phone', 'products']
 export const orderRouter = Router({})
 
 orderRouter.post('/', (req, res) => {
-    const objectCheck = (obj:orderType) => {
-        for (let key  in obj) {
-            if(!obj[key] || obj['products'].length === 0){
+    const objectCheck = (obj: orderType) => {
+        namesArray.forEach(el => {
+            if (!obj.hasOwnProperty(el)) {
                 res.status(400).send({error: 'Some fields are invalid'})
+                return
             }
-            else {
-                res.status(200)
-            }
+        })
+        if (obj['products'].length === 0) {
+            res.status(400).send({error: 'You doesnt order any product'})
+            return
+        } else {
+            res.send(200)
         }
     }
     objectCheck(req.body)
