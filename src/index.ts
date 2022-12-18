@@ -4,14 +4,15 @@ import {productsRouter} from './routes/products-router';
 import {addressesRouter} from './routes/addresses-router';
 import cors from 'cors';
 import {orderRouter} from './routes/orderRouter';
+import moment from 'moment/moment';
 
 const app = express()
 const port = process.env.PORT || 3000
 const corsOptions = {
-    "origin": "*",
-    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-    "preflightContinue": false,
-    "optionsSuccessStatus": 204,
+    'origin': '*',
+    'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    'preflightContinue': false,
+    'optionsSuccessStatus': 204,
 }
 app.use(cors(corsOptions))
 app.use(bodyParser())
@@ -21,6 +22,11 @@ app.use('/order', orderRouter)
 
 app.get('/', (req, res) => {
     res.send('Hello World!!!');
+})
+
+app.get('/datetime', (req, res) => {
+    let date = moment().format()
+    res.send(date)
 })
 
 //start app
